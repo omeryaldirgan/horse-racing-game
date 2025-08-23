@@ -1,0 +1,35 @@
+{
+  "name": "horse-racing-game",
+  "version": "1.0.0",
+  "description": "Interactive Horse Racing Game - Front-End Case Study",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.0",
+    "@vue/cli-plugin-eslint": "^5.0.0",
+    "@vue/cli-service": "^5.0.0",
+    "@vue/test-utils": "^2.4.0",
+    "cypress": "^12.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-vue": "^9.0.0"
+  },
+  "keywords": [
+    "vue",
+    "game",
+    "racing",
+    "frontend"
+  ],
+  "author": "Senior Frontend Developer",
+  "license": "MIT"
+}
