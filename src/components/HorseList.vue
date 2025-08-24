@@ -95,12 +95,12 @@ export default {
 }
 
 .panel-title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   text-align: left;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -124,12 +124,12 @@ export default {
 .horse-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .horse-table th {
   background: rgba(248, 250, 252, 0.8);
-  padding: 0.75rem 0.75rem;
+  padding: 0.6rem 0.6rem; 
   text-align: left;
   font-weight: 600;
   color: #374151;
@@ -137,13 +137,13 @@ export default {
   position: sticky;
   top: 0;
   z-index: 10;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
 .horse-table td {
-  padding: 0.75rem;
+  padding: 0.6rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   vertical-align: middle;
 }
@@ -164,7 +164,7 @@ export default {
 .horse-name {
   font-weight: 600;
   color: #1a1a1a;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .horse-condition {
@@ -173,9 +173,9 @@ export default {
 
 .condition-bar {
   position: relative;
-  height: 12px;
+  height: 10px;
   background: rgba(0, 0, 0, 0.06);
-  border-radius: 6px;
+  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -190,7 +190,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -202,8 +202,8 @@ export default {
 }
 
 .color-indicator {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -211,10 +211,10 @@ export default {
 }
 
 .horse-stats {
-  margin-top: 1rem;
-  padding: 1rem;
+  margin-top: 0.8rem;
+  padding: 0.8rem;
   background: rgba(248, 250, 252, 0.8);
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -232,16 +232,16 @@ export default {
 .stat-label {
   font-weight: 500;
   color: #6b7280;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .stat-value {
   font-weight: 600;
   color: #1a1a1a;
   background: rgba(0, 0, 0, 0.06);
-  padding: 0.25rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {
