@@ -31,7 +31,7 @@
         </div>
         
         <div class="finish-line">
-          <span class="finish-text">FINISH</span>
+          <span class="finish-icon">🏁</span>
         </div>
       </div>
     </div>
@@ -241,7 +241,9 @@ export default {
   background: #6c757d;
   color: white;
   font-weight: 700;
-  border-radius: 8px 0 0 8px;
+  border-radius: 8px 8px 0 0;
+  transform: rotate(270deg);
+  font-size: 0.9rem;
 }
 
 .lane-track {
@@ -314,21 +316,22 @@ export default {
 }
 
 .finish-line {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3);
+  padding: 8px;
+  border-radius: 50%;
   transition: all 0.2s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finish-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .finish-line:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
+  transform: scale(1.1);
 }
 
 
