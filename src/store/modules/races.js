@@ -42,7 +42,6 @@ const actions = {
     
     commit('SET_RACE_SCHEDULE', schedule)
     
-    // Initialize with empty results
     commit('SET_RACE_RESULTS', [])
     
     return schedule

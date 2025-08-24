@@ -1,5 +1,5 @@
 const state = {
-  gameStatus: 'idle' // idle, ready, racing, paused, finished
+  gameStatus: 'idle'
 }
 
 const mutations = {
@@ -12,7 +12,6 @@ const actions = {
   async initializeGame({ commit, dispatch }) {
     commit('SET_GAME_STATUS', 'idle')
     
-    // Generate horses and race schedule
     await dispatch('horses/generateHorseList', null, { root: true })
     await dispatch('horses/selectRandomHorses', 10, { root: true })
     await dispatch('races/generateRaceSchedule', null, { root: true })
@@ -33,7 +32,6 @@ const actions = {
   resetGame({ commit, dispatch }) {
     commit('SET_GAME_STATUS', 'idle')
     
-    // Keep the same 20 horses but select different random ones for racing
     dispatch('horses/selectRandomHorses', 10, { root: true })
     dispatch('races/generateRaceSchedule', null, { root: true })
     

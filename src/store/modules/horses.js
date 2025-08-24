@@ -22,7 +22,6 @@ const actions = {
   },
   
   selectRandomHorses({ commit, state }, count = 10) {
-    // Select random horses from the available pool
     const availableHorses = [...state.horses]
     const selected = []
     

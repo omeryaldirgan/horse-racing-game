@@ -42,13 +42,11 @@ export default {
   },
   
   async mounted() {
-    // Initialize the game when component mounts
     await this.$store.dispatch('game/initializeGame')
   },
   
   methods: {
     onRaceCompleted() {
-      // Stop race music when race is completed
       this.$refs.gameControls.stopRaceMusic()
     }
   }

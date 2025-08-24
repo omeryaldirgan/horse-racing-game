@@ -88,7 +88,6 @@ export default {
       const horse = getHorseInLane(lane)
       if (!horse) return {}
       
-      // Calculate individual horse progress based on condition
       const horseSpeed = horse.condition / 100
       const horseProgress = isRacing.value ? 
         Math.min(raceProgress.value * horseSpeed, 100) : 0
@@ -102,26 +101,21 @@ export default {
     const startRaceAnimation = () => {
       raceProgress.value = 0
       animationInterval.value = setInterval(() => {
-        raceProgress.value += 0.5 // Slower increment for smoother animation
+        raceProgress.value += 0.5
         if (raceProgress.value >= 100) {
           clearInterval(animationInterval.value)
-          // Race completed - find the race results
           const raceResults = findRaceWinner()
           store.dispatch('races/completeRace', raceResults)
           
-          // Emit event to stop race music
           emit('race-completed')
         }
-      }, 50) // Faster updates for smoother animation
+      }, 50)
     }
     
     const findRaceWinner = () => {
-      // Calculate final positions based on horse conditions and random factors
       const horsesWithResults = selectedHorses.value.map(horse => {
-        // Base time from distance and condition
         const baseTime = currentDistance.value / (horse.condition * 0.1)
-        // Add some randomness
-        const randomFactor = 0.8 + Math.random() * 0.4 // 0.8 to 1.2
+        const randomFactor = 0.8 + Math.random() * 0.4
         const finalTime = baseTime * randomFactor
         
         return {
@@ -130,7 +124,6 @@ export default {
         }
       })
       
-      // Sort by time (faster = better)
       return horsesWithResults.sort((a, b) => a.time - b.time)
     }
     
@@ -145,7 +138,6 @@ export default {
       stopRaceAnimation()
     })
     
-    // Watch for race status changes
     watch(isRacing, (newValue) => {
       if (newValue) {
         startRaceAnimation()
