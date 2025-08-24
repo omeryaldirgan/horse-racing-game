@@ -28,7 +28,6 @@ An interactive horse racing game built with Vue.js, demonstrating clean code pri
 
 ### Utilities
 - `horseGenerator.js` - Horse creation and management
-- `raceCalculator.js` - Race simulation and calculations
 - `constants.js` - Game configuration and constants
 
 ## 🚀 Getting Started

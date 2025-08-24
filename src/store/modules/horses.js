@@ -11,12 +11,6 @@ const mutations = {
   },
   SET_SELECTED_HORSES(state, horses) {
     state.selectedHorses = horses
-  },
-  UPDATE_HORSE_CONDITION(state, { horseId, condition }) {
-    const horse = state.horses.find(h => h.id === horseId)
-    if (horse) {
-      horse.condition = condition
-    }
   }
 }
 
@@ -39,10 +33,6 @@ const actions = {
     
     commit('SET_SELECTED_HORSES', selected)
     return selected
-  },
-  
-  updateHorseCondition({ commit }, payload) {
-    commit('UPDATE_HORSE_CONDITION', payload)
   }
 }
 

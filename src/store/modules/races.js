@@ -49,16 +49,11 @@ const actions = {
   },
   
   startRace({ commit, state, rootGetters }) {
-    console.log('Starting race - current lap:', state.currentLap)
-    console.log('Race schedule length:', state.raceSchedule.length)
-    
     if (state.currentLap >= state.raceSchedule.length) {
-      console.log('No more races available')
       return false
     }
     
     const selectedHorses = rootGetters['horses/selectedHorses']
-    console.log('Selected horses for race:', selectedHorses)
     
     commit('SET_RACING_STATUS', true)
     
@@ -66,7 +61,6 @@ const actions = {
     currentRace.participants = selectedHorses
     commit('SET_CURRENT_RACE', currentRace)
     
-    console.log('Race started:', currentRace)
     return currentRace
   },
   

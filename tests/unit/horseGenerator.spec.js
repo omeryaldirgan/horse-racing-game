@@ -4,20 +4,20 @@ import { GAME_CONFIG } from '@/utils/constants'
 describe('Horse Generator', () => {
   describe('generateHorse', () => {
     it('should generate a horse with required properties', () => {
-      const horse = generateHorse()
+      const horse = generateHorse(0)
       
       expect(horse).toHaveProperty('id')
       expect(horse).toHaveProperty('name')
       expect(horse).toHaveProperty('color')
       expect(horse).toHaveProperty('condition')
-      expect(typeof horse.id).toBe('number')
+      expect(typeof horse.id).toBe('string')
       expect(typeof horse.name).toBe('string')
       expect(typeof horse.color).toBe('string')
       expect(typeof horse.condition).toBe('number')
     })
     
     it('should generate horse with condition between 1 and 100', () => {
-      const horse = generateHorse()
+      const horse = generateHorse(0)
       
       expect(horse.condition).toBeGreaterThanOrEqual(1)
       expect(horse.condition).toBeLessThanOrEqual(100)

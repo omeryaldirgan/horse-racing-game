@@ -38,7 +38,7 @@ export default {
   setup() {
     const store = useStore()
     
-    const isGenerating = computed(() => store.getters.isLoading)
+    const isGenerating = computed(() => false) // Simplified since isLoading was removed
     const isRacing = computed(() => store.getters['races/isRacing'])
     const gameStatus = computed(() => store.getters['game/gameStatus'])
     const canStart = computed(() => store.getters['game/canStart'])

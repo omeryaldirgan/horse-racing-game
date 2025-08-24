@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -149,22 +149,15 @@ export default {
       }
     }
     
-    onMounted(() => {
-      // Initialize race progress
-    })
-    
     onUnmounted(() => {
       stopRaceAnimation()
     })
     
     // Watch for race status changes
     watch(isRacing, (newValue) => {
-      console.log('Race status changed:', newValue)
       if (newValue) {
-        console.log('Starting race animation')
         startRaceAnimation()
       } else {
-        console.log('Stopping race animation')
         stopRaceAnimation()
       }
     })
