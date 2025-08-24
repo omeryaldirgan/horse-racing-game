@@ -21,7 +21,7 @@ describe('Horse Racing Game', () => {
   
   it('should start and pause races', () => {
     cy.get('.generate-btn').click()
-    cy.wait(1000) // Wait for generation
+    cy.wait(1000)
     
     cy.get('.start-btn').click()
     cy.get('.game-status').should('contain', 'Race in Progress')
@@ -36,8 +36,7 @@ describe('Horse Racing Game', () => {
     
     cy.get('.start-btn').click()
     
-    // Wait for race to complete
-    cy.wait(15000) // Race duration
+    cy.wait(15000)
     
     cy.get('.race-results').should('contain', 'Results')
     cy.get('.result-item').should('be.visible')

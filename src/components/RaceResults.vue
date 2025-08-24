@@ -10,7 +10,7 @@
       >
         <div class="result-header">
           <span class="lap-number">{{ result.lap }}{{ getOrdinalSuffix(result.lap) }} Lap</span>
-          <span class="race-distance">- {{ result.length }}m</span>
+          <span class="race-distance">{{ result.length }}m</span>
         </div>
         
         <div class="result-content">

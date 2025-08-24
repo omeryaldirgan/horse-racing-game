@@ -11,7 +11,7 @@
       >
         <div class="race-header">
           <span class="lap-number">{{ race.lap }}{{ getOrdinalSuffix(race.lap) }} Lap</span>
-          <span class="race-distance">- {{ race.length }}m</span>
+          <span class="race-distance">{{ race.length }}m</span>
         </div>
         
         <div class="race-participants" v-if="race.participants.length > 0">
