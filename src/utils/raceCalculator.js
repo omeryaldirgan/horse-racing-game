@@ -1,4 +1,4 @@
-import { calculateHorseSpeed } from "./horseGenerator"
+import { calculateHorseSpeed } from './horseGenerator'
 
 /**
  * Simulates a race and returns results

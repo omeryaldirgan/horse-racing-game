@@ -1,4 +1,4 @@
-import { generateHorses } from "@/utils/horseGenerator"
+import { generateHorses } from '@/utils/horseGenerator'
 
 const state = {
   horses: [],
@@ -23,25 +23,19 @@ const mutations = {
 const actions = {
   generateHorseList({ commit }) {
     const horses = generateHorses()
-    commit("SET_HORSES", horses)
+    commit('SET_HORSES', horses)
     return horses
   },
   
   selectRandomHorses({ commit, state }, count = 10) {
-    const availableHorses = [...state.horses]
-    const selected = []
-    
-    for (let i = 0; i < count && availableHorses.length > 0; i++) {
-      const randomIndex = Math.floor(Math.random() * availableHorses.length)
-      selected.push(availableHorses.splice(randomIndex, 1)[0])
-    }
-    
-    commit("SET_SELECTED_HORSES", selected)
+    // Always select the first 10 horses for consistency
+    const selected = state.horses.slice(0, count)
+    commit('SET_SELECTED_HORSES', selected)
     return selected
   },
   
   updateHorseCondition({ commit }, payload) {
-    commit("UPDATE_HORSE_CONDITION", payload)
+    commit('UPDATE_HORSE_CONDITION', payload)
   }
 }
 

@@ -1,7 +1,7 @@
-import { createStore } from "vuex"
-import horses from "./modules/horses"
-import races from "./modules/races"
-import game from "./modules/game"
+import { createStore } from 'vuex'
+import horses from './modules/horses'
+import races from './modules/races'
+import game from './modules/game'
 
 export default createStore({
   modules: {
@@ -27,10 +27,10 @@ export default createStore({
   
   actions: {
     setLoading({ commit }, isLoading) {
-      commit("SET_LOADING", isLoading)
+      commit('SET_LOADING', isLoading)
     },
     setError({ commit }, error) {
-      commit("SET_ERROR", error)
+      commit('SET_ERROR', error)
     }
   },
   

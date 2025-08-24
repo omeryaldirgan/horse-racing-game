@@ -44,33 +44,33 @@
 </template>
 
 <script>
-import { computed } from "vue"
-import { useStore } from "vuex"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  name: "RaceProgram",
+  name: 'RaceProgram',
   
   setup() {
     const store = useStore()
     
-    const raceSchedule = computed(() => store.getters["races/raceSchedule"])
+    const raceSchedule = computed(() => store.getters['races/raceSchedule'])
     
     const getOrdinalSuffix = (num) => {
       const j = num % 10
       const k = num % 100
-      if (j === 1 && k !== 11) return "ST"
-      if (j === 2 && k !== 12) return "ND"
-      if (j === 3 && k !== 13) return "RD"
-      return "TH"
+      if (j === 1 && k !== 11) return 'ST'
+      if (j === 2 && k !== 12) return 'ND'
+      if (j === 3 && k !== 13) return 'RD'
+      return 'TH'
     }
     
     const getRaceStatusClass = (status) => {
       const statusMap = {
-        pending: "status-pending",
-        active: "status-active",
-        completed: "status-completed"
+        pending: 'status-pending',
+        active: 'status-active',
+        completed: 'status-completed'
       }
-      return statusMap[status] || "status-pending"
+      return statusMap[status] || 'status-pending'
     }
     
     return {
@@ -84,118 +84,132 @@ export default {
 
 <style scoped>
 .race-program {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .section-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
   margin-bottom: 1rem;
-  text-align: center;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 0.5rem;
+  text-align: left;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .program-container {
-  max-height: 300px;
+  max-height: 260px;
   overflow-y: auto;
 }
 
 .race-item {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  margin-bottom: 0.75rem;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .race-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .race-item.status-pending {
-  border-left: 4px solid #6c757d;
+  border-left: 3px solid #d1d5db;
 }
 
 .race-item.status-active {
-  border-left: 4px solid #007bff;
-  background: #e3f2fd;
+  border-left: 3px solid #3b82f6;
+  background: rgba(59, 130, 246, 0.01);
 }
 
 .race-item.status-completed {
-  border-left: 4px solid #28a745;
-  background: #d4edda;
+  border-left: 3px solid #10b981;
+  background: rgba(16, 185, 129, 0.01);
 }
 
 .race-header {
-  background: #e9ecef;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .lap-number {
-  font-weight: 700;
-  color: #2c3e50;
-  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.85rem;
 }
 
 .race-distance {
-  font-weight: 600;
-  color: #6c757d;
-  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 0.75rem;
 }
 
 .race-participants {
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .participants-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 
 .participants-table th {
-  background: #f8f9fa;
-  padding: 8px;
+  background: transparent;
+  padding: 0.5rem 0.75rem;
   text-align: left;
   font-weight: 600;
-  color: #495057;
-  border-bottom: 1px solid #dee2e6;
+  color: #6b7280;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .participants-table td {
-  padding: 8px;
-  border-bottom: 1px solid #e9ecef;
+  padding: 0.5rem 0.75rem;
+  border-bottom: none;
+  background: transparent;
+}
+
+.participants-table tr:hover {
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .position {
-  font-weight: 700;
-  color: #007bff;
-  width: 60px;
+  font-weight: 600;
+  color: #3b82f6;
+  width: 45px;
+  font-size: 0.75rem;
 }
 
 .horse-name {
-  font-weight: 600;
-  color: #2c3e50;
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.75rem;
 }
 
 .race-status {
-  padding: 1rem;
+  padding: 0.75rem;
   text-align: center;
 }
 
 .status-text {
-  font-weight: 600;
-  color: #6c757d;
+  font-weight: 500;
+  color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.02em;
+  font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {

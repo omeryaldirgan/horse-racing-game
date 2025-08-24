@@ -29,30 +29,30 @@
 </template>
 
 <script>
-import { computed, onMounted } from "vue"
-import { useStore } from "vuex"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  name: "GameControls",
+  name: 'GameControls',
   
   setup() {
     const store = useStore()
     
     const isGenerating = computed(() => store.getters.isLoading)
-    const isRacing = computed(() => store.getters["races/isRacing"])
-    const gameStatus = computed(() => store.getters["game/gameStatus"])
-    const canStart = computed(() => store.getters["game/canStart"])
-    const canPause = computed(() => store.getters["game/canPause"])
+    const isRacing = computed(() => store.getters['races/isRacing'])
+    const gameStatus = computed(() => store.getters['game/gameStatus'])
+    const canStart = computed(() => store.getters['game/canStart'])
+    const canPause = computed(() => store.getters['game/canPause'])
     
     const gameStatusText = computed(() => {
       const statusMap = {
-        idle: "Ready to Start",
-        ready: "Ready to Race",
-        racing: "Race in Progress",
-        paused: "Race Paused",
-        finished: "All Races Complete"
+        idle: 'Ready to Start',
+        ready: 'Ready to Race',
+        racing: 'Race in Progress',
+        paused: 'Race Paused',
+        finished: 'All Races Complete'
       }
-      return statusMap[gameStatus.value] || "Unknown"
+      return statusMap[gameStatus.value] || 'Unknown'
     })
     
     const gameStatusClass = computed(() => {
@@ -61,23 +61,21 @@ export default {
     
     const generateProgram = async () => {
       try {
-        await store.dispatch("game/initializeGame")
+        await store.dispatch('game/initializeGame')
       } catch (error) {
-        console.error("Failed to generate program:", error)
+        console.error('Failed to generate program:', error)
       }
     }
     
     const toggleRace = () => {
       if (isRacing.value) {
-        store.dispatch("game/pauseGame")
+        store.dispatch('game/pauseGame')
       } else {
-        store.dispatch("game/startGame")
+        store.dispatch('game/startGame')
       }
     }
     
-    onMounted(() => {
-      store.dispatch("game/initializeGame")
-    })
+    // Game initialization is handled in App.vue
     
     return {
       isGenerating,

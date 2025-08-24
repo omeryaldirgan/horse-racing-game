@@ -1,4 +1,4 @@
-import { RACE_LENGTHS } from "@/utils/constants"
+import { RACE_LENGTHS } from '@/utils/constants'
 
 const state = {
   raceSchedule: [],
@@ -35,54 +35,58 @@ const actions = {
       id: index + 1,
       lap: index + 1,
       length,
-      status: "pending",
+      status: 'pending',
       participants: [],
       result: null
     }))
     
-    commit("SET_RACE_SCHEDULE", schedule)
+    commit('SET_RACE_SCHEDULE', schedule)
+    
+    // Initialize with empty results
+    commit('SET_RACE_RESULTS', [])
+    
     return schedule
   },
   
   startRace({ commit, state, rootGetters }) {
-    console.log("Starting race - current lap:", state.currentLap)
-    console.log("Race schedule length:", state.raceSchedule.length)
+    console.log('Starting race - current lap:', state.currentLap)
+    console.log('Race schedule length:', state.raceSchedule.length)
     
     if (state.currentLap >= state.raceSchedule.length) {
-      console.log("No more races available")
+      console.log('No more races available')
       return false
     }
     
-    const selectedHorses = rootGetters["horses/selectedHorses"]
-    console.log("Selected horses for race:", selectedHorses)
+    const selectedHorses = rootGetters['horses/selectedHorses']
+    console.log('Selected horses for race:', selectedHorses)
     
-    commit("SET_RACING_STATUS", true)
+    commit('SET_RACING_STATUS', true)
     
     const currentRace = state.raceSchedule[state.currentLap]
     currentRace.participants = selectedHorses
-    commit("SET_CURRENT_RACE", currentRace)
+    commit('SET_CURRENT_RACE', currentRace)
     
-    console.log("Race started:", currentRace)
+    console.log('Race started:', currentRace)
     return currentRace
   },
   
   pauseRace({ commit }) {
-    commit("SET_RACING_STATUS", false)
+    commit('SET_RACING_STATUS', false)
   },
   
   completeRace({ commit, state }, result) {
     const currentRace = state.raceSchedule[state.currentLap]
-    currentRace.status = "completed"
+    currentRace.status = 'completed'
     currentRace.result = result
     
-    commit("ADD_RACE_RESULT", {
+    commit('ADD_RACE_RESULT', {
       lap: currentRace.lap,
       length: currentRace.length,
       result: result
     })
     
-    commit("SET_CURRENT_LAP", state.currentLap + 1)
-    commit("SET_RACING_STATUS", false)
+    commit('SET_CURRENT_LAP', state.currentLap + 1)
+    commit('SET_RACING_STATUS', false)
     
     return currentRace
   }

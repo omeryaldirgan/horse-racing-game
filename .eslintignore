@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.nyc_output/
+*.min.js
+*.bundle.js
+public/
+*.config.js
+start.sh

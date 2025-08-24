@@ -66,19 +66,19 @@
 </template>
 
 <script>
-import { computed } from "vue"
-import { useStore } from "vuex"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  name: "HorseList",
+  name: 'HorseList',
   
   setup() {
     const store = useStore()
     
-    const horses = computed(() => store.getters["horses/allHorses"])
-    const selectedHorses = computed(() => store.getters["horses/selectedHorses"])
-    const horsesCount = computed(() => store.getters["horses/horsesCount"])
-    const selectedHorsesCount = computed(() => store.getters["horses/selectedHorsesCount"])
+    const horses = computed(() => store.getters['horses/allHorses'])
+    const selectedHorses = computed(() => store.getters['horses/selectedHorses'])
+    const horsesCount = computed(() => store.getters['horses/horsesCount'])
+    const selectedHorsesCount = computed(() => store.getters['horses/selectedHorsesCount'])
     
     const isHorseSelected = (horseId) => {
       return selectedHorses.value.some(horse => horse.id === horseId)
@@ -103,80 +103,87 @@ export default {
 }
 
 .panel-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1.2rem;
+  text-align: left;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .horse-table-container {
   flex: 1;
   overflow-y: auto;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .horse-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .horse-table th {
-  background: #f8f9fa;
-  padding: 12px 8px;
+  background: rgba(248, 250, 252, 0.8);
+  padding: 0.75rem 0.75rem;
   text-align: left;
   font-weight: 600;
-  color: #495057;
-  border-bottom: 2px solid #dee2e6;
+  color: #374151;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 0;
   z-index: 10;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .horse-table td {
-  padding: 10px 8px;
-  border-bottom: 1px solid #e9ecef;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   vertical-align: middle;
 }
 
 .horse-row {
-  transition: background-color 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .horse-row:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(248, 250, 252, 0.6);
 }
 
 .horse-row.selected {
-  background-color: #e3f2fd;
-  border-left: 4px solid #2196f3;
+  background-color: rgba(59, 130, 246, 0.05);
+  border-left: 3px solid #3b82f6;
 }
 
 .horse-name {
   font-weight: 600;
-  color: #2c3e50;
+  color: #1a1a1a;
+  font-size: 0.85rem;
 }
 
 .horse-condition {
-  width: 120px;
+  width: 100px;
 }
 
 .condition-bar {
   position: relative;
-  height: 20px;
-  background: #e9ecef;
-  border-radius: 10px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 9px;
   overflow: hidden;
 }
 
 .condition-fill {
   height: 100%;
-  transition: width 0.3s ease;
-  border-radius: 10px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 9px;
 }
 
 .condition-text {
@@ -184,22 +191,22 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .horse-color {
-  width: 60px;
+  width: 50px;
   text-align: center;
 }
 
 .color-indicator {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
 }
@@ -207,9 +214,9 @@ export default {
 .horse-stats {
   margin-top: 1rem;
   padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-top: 2px solid #e9ecef;
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .stat-item {
@@ -224,16 +231,18 @@ export default {
 }
 
 .stat-label {
-  font-weight: 600;
-  color: #6c757d;
+  font-weight: 500;
+  color: #6b7280;
+  font-size: 0.8rem;
 }
 
 .stat-value {
-  font-weight: 700;
-  color: #2c3e50;
-  background: #e9ecef;
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {

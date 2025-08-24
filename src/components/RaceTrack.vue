@@ -49,24 +49,24 @@
 </template>
 
 <script>
-import { computed, onMounted, onUnmounted, ref, watch } from "vue"
-import { useStore } from "vuex"
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  name: "RaceTrack",
+  name: 'RaceTrack',
   
   setup() {
     const store = useStore()
     const raceProgress = ref(0)
     const animationInterval = ref(null)
     
-    const isRacing = computed(() => store.getters["races/isRacing"])
-    const currentRace = computed(() => store.getters["races/currentRace"])
-    const selectedHorses = computed(() => store.getters["horses/selectedHorses"])
-    const currentLap = computed(() => store.getters["races/currentLap"])
+    const isRacing = computed(() => store.getters['races/isRacing'])
+    const currentRace = computed(() => store.getters['races/currentRace'])
+    const selectedHorses = computed(() => store.getters['horses/selectedHorses'])
+    const currentLap = computed(() => store.getters['races/currentLap'])
     
     const currentLapText = computed(() => {
-      if (!currentRace.value) return "No Race"
+      if (!currentRace.value) return 'No Race'
       return `${currentRace.value.lap}${getOrdinalSuffix(currentRace.value.lap)} Lap`
     })
     
@@ -77,10 +77,10 @@ export default {
     const getOrdinalSuffix = (num) => {
       const j = num % 10
       const k = num % 100
-      if (j === 1 && k !== 11) return "ST"
-      if (j === 2 && k !== 12) return "ND"
-      if (j === 3 && k !== 13) return "RD"
-      return "TH"
+      if (j === 1 && k !== 11) return 'ST'
+      if (j === 2 && k !== 12) return 'ND'
+      if (j === 3 && k !== 13) return 'RD'
+      return 'TH'
     }
     
     const getHorseInLane = (lane) => {
@@ -111,30 +111,30 @@ export default {
         raceProgress.value += 0.5 // Slower increment for smoother animation
         if (raceProgress.value >= 100) {
           clearInterval(animationInterval.value)
-          // Race completed - find the winner based on actual progress
-          const winner = findRaceWinner()
-          store.dispatch("races/completeRace", {
-            participants: selectedHorses.value,
-            winner: winner
-          })
+          // Race completed - find the race results
+          const raceResults = findRaceWinner()
+          store.dispatch('races/completeRace', raceResults)
         }
       }, 50) // Faster updates for smoother animation
     }
     
     const findRaceWinner = () => {
-      // Find horse with highest progress based on condition
-      let winner = selectedHorses.value[0]
-      let maxProgress = 0
-      
-      selectedHorses.value.forEach(horse => {
-        const horseProgress = Math.min(raceProgress.value * (horse.condition / 100), 100)
-        if (horseProgress > maxProgress) {
-          maxProgress = horseProgress
-          winner = horse
+      // Calculate final positions based on horse conditions and random factors
+      const horsesWithResults = selectedHorses.value.map(horse => {
+        // Base time from distance and condition
+        const baseTime = currentDistance.value / (horse.condition * 0.1)
+        // Add some randomness
+        const randomFactor = 0.8 + Math.random() * 0.4 // 0.8 to 1.2
+        const finalTime = baseTime * randomFactor
+        
+        return {
+          ...horse,
+          time: finalTime
         }
       })
       
-      return winner
+      // Sort by time (faster = better)
+      return horsesWithResults.sort((a, b) => a.time - b.time)
     }
     
     const stopRaceAnimation = () => {
@@ -154,12 +154,12 @@ export default {
     
     // Watch for race status changes
     watch(isRacing, (newValue) => {
-      console.log("Race status changed:", newValue)
+      console.log('Race status changed:', newValue)
       if (newValue) {
-        console.log("Starting race animation")
+        console.log('Starting race animation')
         startRaceAnimation()
       } else {
-        console.log("Stopping race animation")
+        console.log('Stopping race animation')
         stopRaceAnimation()
       }
     })

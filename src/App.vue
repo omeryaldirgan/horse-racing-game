@@ -25,20 +25,25 @@
 </template>
 
 <script>
-import GameControls from "@/components/GameControls.vue"
-import HorseList from "@/components/HorseList.vue"
-import RaceTrack from "@/components/RaceTrack.vue"
-import RaceProgram from "@/components/RaceProgram.vue"
-import RaceResults from "@/components/RaceResults.vue"
+import GameControls from '@/components/GameControls.vue'
+import HorseList from '@/components/HorseList.vue'
+import RaceTrack from '@/components/RaceTrack.vue'
+import RaceProgram from '@/components/RaceProgram.vue'
+import RaceResults from '@/components/RaceResults.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     GameControls,
     HorseList,
     RaceTrack,
     RaceProgram,
     RaceResults
+  },
+  
+  async mounted() {
+    // Initialize the game when component mounts
+    await this.$store.dispatch('game/initializeGame')
   }
 }
 </script>
@@ -52,7 +57,6 @@ export default {
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
 }
 
@@ -89,7 +93,6 @@ body {
   display: grid;
   grid-template-columns: 300px 1fr 350px;
   gap: 2rem;
-  max-width: 1400px;
   margin: 0 auto;
   min-height: 80vh;
 }

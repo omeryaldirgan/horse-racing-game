@@ -1,17 +1,18 @@
-import { HORSE_NAMES, HORSE_COLORS, GAME_CONFIG } from "./constants"
+import { HORSE_NAMES, HORSE_COLORS, GAME_CONFIG } from './constants'
 
 /**
  * Generates a random horse with unique properties
  * @returns {Object} Horse object with id, name, color, and condition
  */
-export function generateHorse() {
-  const randomNameIndex = Math.floor(Math.random() * HORSE_NAMES.length)
-  const randomColorIndex = Math.floor(Math.random() * HORSE_COLORS.length)
+export function generateHorse(index) {
+  // Use index to ensure consistent horses
+  const nameIndex = index % HORSE_NAMES.length
+  const colorIndex = index % HORSE_COLORS.length
   
   return {
-    id: Date.now() + Math.random(),
-    name: HORSE_NAMES[randomNameIndex],
-    color: HORSE_COLORS[randomColorIndex],
+    id: `horse_${index + 1}`,
+    name: HORSE_NAMES[nameIndex],
+    color: HORSE_COLORS[colorIndex],
     condition: Math.floor(Math.random() * 100) + 1
   }
 }
@@ -22,28 +23,11 @@ export function generateHorse() {
  */
 export function generateHorses() {
   const horses = []
-  const usedNames = new Set()
-  const usedColors = new Set()
   
-  // Generate exactly 20 horses
+  // Generate exactly 20 horses with consistent properties
   for (let i = 0; i < GAME_CONFIG.MAX_HORSES; i++) {
-    let horse
-    let attempts = 0
-    const maxAttempts = 100
-    
-    do {
-      horse = generateHorse()
-      attempts++
-    } while (
-      (usedNames.has(horse.name) || usedColors.has(horse.color)) && 
-      attempts < maxAttempts
-    )
-    
-    if (attempts < maxAttempts) {
-      usedNames.add(horse.name)
-      usedColors.add(horse.color)
-      horses.push(horse)
-    }
+    const horse = generateHorse(i)
+    horses.push(horse)
   }
   
   return horses
