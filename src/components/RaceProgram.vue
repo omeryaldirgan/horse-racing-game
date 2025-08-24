@@ -120,17 +120,15 @@ export default {
 }
 
 .race-item.status-pending {
-  border-left: 3px solid #d1d5db;
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .race-item.status-active {
-  border-left: 3px solid #3b82f6;
-  background: rgba(59, 130, 246, 0.01);
+  background: rgba(59, 130, 246, 0.02);
 }
 
 .race-item.status-completed {
-  border-left: 3px solid #10b981;
-  background: rgba(16, 185, 129, 0.01);
+  background: rgba(16, 185, 129, 0.02);
 }
 
 .race-header {
@@ -140,18 +138,35 @@ export default {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.race-item.status-completed .race-header {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #065f46;
 }
 
 .lap-number {
   font-weight: 600;
   color: #374151;
   font-size: 0.85rem;
+  transition: color 0.3s ease;
 }
 
 .race-distance {
   font-weight: 500;
   color: #6b7280;
   font-size: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.race-item.status-completed .lap-number {
+  color: #065f46;
+}
+
+.race-item.status-completed .race-distance {
+  color: #065f46;
+  opacity: 0.8;
 }
 
 .race-participants {
