@@ -43,7 +43,7 @@ const actions = {
     commit('SET_GAME_STATUS', 'idle')
     commit('SET_RACE_PROGRESS', 0)
     
-    // Don't regenerate horses - keep the same 20 horses
+    // Keep the same 20 horses but select different random ones for racing
     dispatch('horses/selectRandomHorses', 10, { root: true })
     dispatch('races/generateRaceSchedule', null, { root: true })
     

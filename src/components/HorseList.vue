@@ -2,14 +2,11 @@
   <div class="horse-list">
     <h2 class="panel-title">Horse List ({{ horsesCount }})</h2>
     
-    <!-- Debug info -->
-    <div v-if="horses.length === 0" class="debug-info">
-      <p style="color: red; font-weight: bold;">No horses found! Debug info:</p>
-      <p>Horses count: {{ horsesCount }}</p>
-      <p>Horses array length: {{ horses.length }}</p>
+    <div v-if="horses.length === 0" class="no-horses">
+      <p>No horses available. Click "GENERATE PROGRAM" to create horses.</p>
     </div>
     
-    <div class="horse-table-container">
+    <div v-else class="horse-table-container">
       <table class="horse-table">
         <thead>
           <tr>
@@ -19,11 +16,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-if="horses.length === 0">
-            <td colspan="3" style="text-align: center; padding: 2rem; color: #666;">
-              No horses available. Click "GENERATE PROGRAM" to create horses.
-            </td>
-          </tr>
           <tr
             v-for="horse in horses"
             :key="horse.id"
@@ -37,7 +29,7 @@
                   class="condition-fill"
                   :style="{ width: horse.condition + '%', backgroundColor: horse.color }"
                 ></div>
-                <span class="condition-text">{{ horse.condition }}</span>
+                <span class="condition-text">{{ horse.condition }}%</span>
               </div>
             </td>
             <td class="horse-color">
@@ -54,7 +46,7 @@
     
     <div class="horse-stats">
       <div class="stat-item">
-        <span class="stat-label">Total Horses:</span>
+        <span class="stat-label">Total:</span>
         <span class="stat-value">{{ horsesCount }}</span>
       </div>
       <div class="stat-item">
@@ -113,6 +105,13 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+.no-horses {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
 .horse-table-container {
   flex: 1;
   overflow-y: auto;
@@ -169,14 +168,14 @@ export default {
 }
 
 .horse-condition {
-  width: 100px;
+  width: 80px;
 }
 
 .condition-bar {
   position: relative;
-  height: 18px;
+  height: 12px;
   background: rgba(0, 0, 0, 0.06);
-  border-radius: 9px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -191,7 +190,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: white;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -253,7 +252,11 @@ export default {
   }
   
   .condition-bar {
-    width: 80px;
+    width: 60px;
+  }
+  
+  .horse-color {
+    width: 40px;
   }
 }
 </style>

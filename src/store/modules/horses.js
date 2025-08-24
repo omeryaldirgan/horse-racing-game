@@ -28,8 +28,15 @@ const actions = {
   },
   
   selectRandomHorses({ commit, state }, count = 10) {
-    // Always select the first 10 horses for consistency
-    const selected = state.horses.slice(0, count)
+    // Select random horses from the available pool
+    const availableHorses = [...state.horses]
+    const selected = []
+    
+    for (let i = 0; i < count && availableHorses.length > 0; i++) {
+      const randomIndex = Math.floor(Math.random() * availableHorses.length)
+      selected.push(availableHorses.splice(randomIndex, 1)[0])
+    }
+    
     commit('SET_SELECTED_HORSES', selected)
     return selected
   },
