@@ -23,7 +23,6 @@
     "@vue/test-utils": "^2.4.0",
     "cypress": "^12.0.0",
     "eslint": "^8.0.0",
-    "eslint-plugin-cypress": "^5.1.1",
     "eslint-plugin-vue": "^9.0.0"
   },
   "keywords": [
