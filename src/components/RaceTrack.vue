@@ -1,6 +1,6 @@
 <template>
   <div class="race-track">
-    <h2 class="panel-title">Race Track</h2>
+    <h2 class="panel-title" :class="{ 'racing': isRacing }">Race Track</h2>
     
     <div class="track-container">
       <div class="track-lanes">
@@ -36,15 +36,7 @@
       </div>
     </div>
     
-    <div class="race-progress" v-if="isRacing">
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          :style="{ width: raceProgress + '%' }"
-        ></div>
-      </div>
-      <span class="progress-text">{{ Math.round(raceProgress) }}%</span>
-    </div>
+
   </div>
 </template>
 
@@ -191,19 +183,35 @@ export default {
   color: #2c3e50;
   margin-bottom: 1.5rem;
   text-align: center;
-  border-bottom: 2px solid #e9ecef;
   padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.panel-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  background: #e9ecef;
+  transition: width 0.3s ease;
+  width: 100%;
+}
+
+.panel-title.racing::after {
+  background: linear-gradient(90deg, #3b82f6 0%, #10b981 50%, #f59e0b 100%);
+  width: v-bind(raceProgress + '%');
+  transition: width 0.1s linear;
 }
 
 .track-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
 .track-lanes {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -271,11 +279,18 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-top: 2px solid #e9ecef;
+  margin-top: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.track-info:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .lap-info {
@@ -286,52 +301,37 @@ export default {
 
 .lap-text {
   font-weight: 700;
-  color: #2c3e50;
+  color: #1a202c;
   font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .distance-text {
   font-weight: 600;
-  color: #6c757d;
+  color: #4a5568;
   font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 .finish-line {
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
   font-weight: 700;
   font-size: 1.1rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.race-progress {
-  margin-top: 1rem;
-  text-align: center;
+.finish-line:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
 }
 
-.progress-bar {
-  width: 100%;
-  height: 20px;
-  background: #e9ecef;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
 
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-  transition: width 0.1s linear;
-  border-radius: 10px;
-}
-
-.progress-text {
-  font-weight: 600;
-  color: #2c3e50;
-  font-size: 0.9rem;
-}
 
 @media (max-width: 768px) {
   .track-lane {
