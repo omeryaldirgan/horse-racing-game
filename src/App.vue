@@ -2,7 +2,7 @@
   <div id="app" class="horse-racing-game">
     <header class="game-header">
       <h1>Horse Racing Game Trial Day</h1>
-      <GameControls />
+      <GameControls ref="gameControls" />
     </header>
     
     <main class="game-main">
@@ -12,7 +12,7 @@
         </aside>
         
         <section class="race-track-panel">
-          <RaceTrack />
+          <RaceTrack @race-completed="onRaceCompleted" />
         </section>
         
         <aside class="race-info-panel">
@@ -44,6 +44,13 @@ export default {
   async mounted() {
     // Initialize the game when component mounts
     await this.$store.dispatch('game/initializeGame')
+  },
+  
+  methods: {
+    onRaceCompleted() {
+      // Stop race music when race is completed
+      this.$refs.gameControls.stopRaceMusic()
+    }
   }
 }
 </script>

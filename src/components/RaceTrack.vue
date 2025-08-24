@@ -55,7 +55,9 @@ import { useStore } from 'vuex'
 export default {
   name: 'RaceTrack',
   
-  setup() {
+  emits: ['race-completed'],
+  
+  setup(props, { emit }) {
     const store = useStore()
     const raceProgress = ref(0)
     const animationInterval = ref(null)
@@ -114,6 +116,9 @@ export default {
           // Race completed - find the race results
           const raceResults = findRaceWinner()
           store.dispatch('races/completeRace', raceResults)
+          
+          // Emit event to stop race music
+          emit('race-completed')
         }
       }, 50) // Faster updates for smoother animation
     }

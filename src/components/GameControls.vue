@@ -59,18 +59,87 @@ export default {
       return `status-${gameStatus.value}`
     })
     
+    const playGenerateSound = () => {
+      // Create a preparation gong sound (shorter and softer)
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+      
+      // Two oscillators for preparation sound
+      const prep1 = audioContext.createOscillator()
+      const prep2 = audioContext.createOscillator()
+      const gainNode = audioContext.createGain()
+      const filter = audioContext.createBiquadFilter()
+      
+      // Connect components
+      prep1.connect(gainNode)
+      prep2.connect(gainNode)
+      gainNode.connect(filter)
+      filter.connect(audioContext.destination)
+      
+      // Softer filter for preparation sound
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(1500, audioContext.currentTime)
+      filter.Q.setValueAtTime(0.8, audioContext.currentTime)
+      
+      // Softer frequencies
+      prep1.frequency.setValueAtTime(300, audioContext.currentTime) // Medium frequency
+      prep2.frequency.setValueAtTime(500, audioContext.currentTime) // Higher harmonic
+      
+      // Shorter, softer envelope
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime)
+      gainNode.gain.linearRampToValueAtTime(0.25, audioContext.currentTime + 0.03) // Quick attack
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8) // Medium decay
+      
+      // Start oscillators
+      prep1.start(audioContext.currentTime)
+      prep2.start(audioContext.currentTime)
+      
+      // Stop after 0.8 seconds
+      prep1.stop(audioContext.currentTime + 0.8)
+      prep2.stop(audioContext.currentTime + 0.8)
+    }
+    
     const generateProgram = async () => {
       try {
+        // Play generate sound
+        playGenerateSound()
         await store.dispatch('game/initializeGame')
       } catch (error) {
         console.error('Failed to generate program:', error)
       }
     }
     
+    // Audio elements for sound effects
+    const gongAudio = new Audio('/sounds/gong.mp3')
+    const raceAudio = new Audio('/sounds/race.mp3')
+    
+    // Set race audio to loop
+    raceAudio.loop = true
+    
+    const playStartSound = () => {
+      // Play gong sound
+      gongAudio.currentTime = 0
+      gongAudio.play()
+      
+      // Start race background music after gong
+      setTimeout(() => {
+        raceAudio.currentTime = 0
+        raceAudio.play()
+      }, 1000) // 1 second delay after gong
+    }
+    
+    const stopRaceMusic = () => {
+      raceAudio.pause()
+      raceAudio.currentTime = 0
+    }
+    
     const toggleRace = () => {
       if (isRacing.value) {
+        // Pause race and stop background music
+        raceAudio.pause()
         store.dispatch('game/pauseGame')
       } else {
+        // Play start sound when starting race
+        playStartSound()
         store.dispatch('game/startGame')
       }
     }
@@ -86,7 +155,10 @@ export default {
       gameStatusText,
       gameStatusClass,
       generateProgram,
-      toggleRace
+      toggleRace,
+      playStartSound,
+      playGenerateSound,
+      stopRaceMusic
     }
   }
 }
